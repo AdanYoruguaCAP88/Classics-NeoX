@@ -13,6 +13,8 @@ data class LightsOutState(
 object LightsOutEngine {
     fun newGame(size: Int = 5, seed: Long = Random.nextLong()): LightsOutState {
         require(size in 3..7)
+        // Start from a solved board and apply deterministic legal moves.
+        // This guarantees that every generated puzzle is solvable.
         val base = List(size * size) { false }
         var state = LightsOutState(size, base, 0, seed, false)
         val random = Random(seed)
