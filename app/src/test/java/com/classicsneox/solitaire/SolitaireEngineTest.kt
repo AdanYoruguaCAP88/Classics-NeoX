@@ -12,7 +12,7 @@ class SolitaireEngineTest {
         assertEquals(24, state.stock.size)
         assertEquals(52, state.tableau.sumOf { it.size } + state.stock.size)
         assertEquals(7, state.tableau.count { it.last().faceUp })
-        assertEquals(21, state.tableau.sumOf { column -> column.dropLast(1).count { it.faceUp } })
+        assertEquals(21, state.tableau.sumOf { column -> column.dropLast(1).count { !it.faceUp } })
     }
 
     @Test fun `ace can move to empty foundation`() {
