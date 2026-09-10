@@ -13,6 +13,7 @@ data class LightsOutState(
 object LightsOutEngine {
     fun newGame(size: Int = 5, seed: Long = Random.nextLong()): LightsOutState {
         require(size in 3..7)
+
         // Start from a solved board and apply deterministic legal moves.
         // This guarantees that every generated puzzle is solvable.
         val base = List(size * size) { false }
@@ -22,6 +23,14 @@ object LightsOutEngine {
         repeat(count) {
             state = press(state, random.nextInt(size * size), countMove = false)
         }
+
+        // Repeated presses can cancel each other out. Avoid presenting an
+        // already-solved "new" puzzle; one additional legal press preserves
+        // solvability while guaranteeing a playable starting state.
+        if (state.solved) {
+            state = press(state, 0, countMove = false)
+        }
+
         return state.copy(moves = 0, solved = isSolved(state))
     }
 
