@@ -1,7 +1,6 @@
 package com.classicsneox.mahjong
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -42,7 +41,7 @@ fun NeoXMahjongGame(
     modifier: Modifier = Modifier,
 ) {
     val viewModel: MahjongViewModel = viewModel(factory = MahjongViewModel.Factory(repository, layout))
-    val state by viewModel.uiState.collectAsStateWithLifecycle()
+    val state = viewModel.uiState.collectAsStateWithLifecycle().value
 
     MahjongScreen(
         state = state,
