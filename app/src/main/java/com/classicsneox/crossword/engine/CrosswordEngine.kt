@@ -79,14 +79,15 @@ object CrosswordEngine {
         return s.copy(errors = e, checks = s.checks + 1)
     }
 
-    fun reveal(s: CrosswordSession, p: CellPosition = s.current ?: return s): CrosswordSession {
-        val x = s.puzzle.charAt(p) ?: return s
+    fun reveal(s: CrosswordSession, p: CellPosition? = null): CrosswordSession {
+        val target = p ?: s.current ?: return s
+        val x = s.puzzle.charAt(target) ?: return s
         return s.copy(
             grid = s.grid.mapIndexed { r, row ->
-                row.mapIndexed { c, v -> if (r == p.row && c == p.col) x else v }
+                row.mapIndexed { c, v -> if (r == target.row && c == target.col) x else v }
             },
-            revealed = s.revealed + p,
-            errors = s.errors - p
+            revealed = s.revealed + target,
+            errors = s.errors - target
         )
     }
 
