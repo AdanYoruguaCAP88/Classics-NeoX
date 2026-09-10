@@ -15,4 +15,6 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Classics-NeoX"
+include(":core")
+include(":mahjong")
 include(":app")
