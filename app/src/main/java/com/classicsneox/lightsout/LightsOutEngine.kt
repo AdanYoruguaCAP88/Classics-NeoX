@@ -14,8 +14,6 @@ object LightsOutEngine {
     fun newGame(size: Int = 5, seed: Long = Random.nextLong()): LightsOutState {
         require(size in 3..7)
 
-        // Start from a solved board and apply deterministic legal moves.
-        // This guarantees that every generated puzzle is solvable.
         val base = List(size * size) { false }
         var state = LightsOutState(size, base, 0, seed, false)
         val random = Random(seed)
@@ -24,11 +22,13 @@ object LightsOutEngine {
             state = press(state, random.nextInt(size * size), countMove = false)
         }
 
-        // Repeated presses can cancel each other out. Avoid presenting an
-        // already-solved "new" puzzle; one additional legal press preserves
-        // solvability while guaranteeing a playable starting state.
+        // The random sequence can theoretically cancel to the solved board.
+        // In that case start from the solved board and apply one guaranteed
+        // non-empty move. That keeps the puzzle solvable and never pre-solved.
         if (state.solved) {
-            state = press(state, 0, countMove = false)
+            val guaranteedIndex = (seed.toInt().and(Int.MAX_VALUE)) % (size * size)
+            state = LightsOutState(size, base, 0, seed, false)
+            state = press(state, guaranteedIndex, countMove = false)
         }
 
         return state.copy(moves = 0, solved = isSolved(state))
