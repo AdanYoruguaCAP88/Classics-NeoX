@@ -7,16 +7,10 @@ plugins {
 
 android {
     namespace = "com.classicsneox.mahjong"
-    // Android 17 (API 37): versión estable vigente desde el 16/06/2026.
-    // AGP 9.4.0 (la actual, setiembre 2026) ya la soporta de fábrica.
     compileSdk = 37
 
     defaultConfig {
         minSdk = 24
-        // Sin testInstrumentationRunner: los tests de comportamiento del
-        // juego ya están en :core (JVM puro, corren en segundos). Este
-        // módulo no necesita su propia suite instrumentada para el
-        // alcance de este entregable.
     }
 
     buildFeatures {
@@ -27,9 +21,10 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlin {
-        jvmToolchain(17)
-    }
+}
+
+kotlin {
+    jvmToolchain(17)
 }
 
 dependencies {
