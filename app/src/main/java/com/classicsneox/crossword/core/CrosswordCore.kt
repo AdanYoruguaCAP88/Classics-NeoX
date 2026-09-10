@@ -45,7 +45,7 @@ class CrosswordPuzzle(
             if (this.words.any { it.start == p }) n[p] = x++
         }
         cellNumbers = n
-        byCell = buildMap {
+        byCell = buildMap<CellPosition, MutableList<PlacedWord>> {
             this@CrosswordPuzzle.words.forEach { w ->
                 for (i in 0 until w.length) getOrPut(w.positionAt(i)) { mutableListOf() }.add(w)
             }
