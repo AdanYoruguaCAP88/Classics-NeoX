@@ -19,9 +19,9 @@ import com.classicsneox.crossword.CrosswordScreen
 import com.classicsneox.lightsout.LightsOutScreen
 import com.classicsneox.mahjong.NeoXMahjongGame
 import com.classicsneox.mahjong.persistence.DataStoreGameStateRepository
+import com.classicsneox.solitaire.presentation.SolitaireScreen
 import com.classicsneox.sudoku.SudokuScreen
 import com.classicsneox.wordsearch.presentation.ui.WordSearchScreen
-import com.classicsneox.solitaire.presentation.SolitaireScreen
 
 private val Context.mahjongDataStore by preferencesDataStore(name = "classics_neox_mahjong")
 
@@ -46,8 +46,8 @@ private fun ClassicsNeoXApp() {
             when (destination) {
                 GameDestination.HOME -> HomeScreen { destination = it }
                 GameDestination.SUDOKU -> SudokuScreen(onBack = goHome)
-                GameDestination.WORD_SEARCH -> GameShell("Sopa de Letras", goHome) { WordSearchScreen() }
-                GameDestination.SOLITAIRE -> GameShell("Solitario", goHome) { SolitaireScreen() }
+                GameDestination.WORD_SEARCH -> GameShell(goHome) { WordSearchScreen() }
+                GameDestination.SOLITAIRE -> GameShell(goHome) { SolitaireScreen() }
                 GameDestination.CROSSWORD -> CrosswordScreen(onBack = goHome)
                 GameDestination.LIGHTS_OUT -> LightsOutScreen(onBack = goHome)
                 GameDestination.MAHJONG -> {
@@ -65,7 +65,6 @@ private fun ClassicsNeoXApp() {
 
 @Composable
 private fun GameShell(
-    title: String,
     onBack: () -> Unit,
     content: @Composable () -> Unit
 ) {
