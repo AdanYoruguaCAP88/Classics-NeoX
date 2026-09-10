@@ -112,10 +112,10 @@ fun WordGrid(
         Column(Modifier.fillMaxSize()) {
             grid.forEach { row ->
                 Row(Modifier.weight(1f)) {
+                    val cellWeight = Modifier.weight(1f)
                     row.forEach { cell ->
                         Box(
-                            modifier = Modifier
-                                .weight(1f)
+                            modifier = cellWeight
                                 .fillMaxHeight()
                                 .padding(2.dp)
                                 .clip(RoundedCornerShape(8.dp))
