@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -33,15 +34,15 @@ fun TileView(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val elevation = animateDpAsState(if (tile.isFree) 4.dp else 1.dp, label = "tileElevation").value
-    val borderColor = animateColorAsState(
+    val elevation by animateDpAsState(if (tile.isFree) 4.dp else 1.dp, label = "tileElevation")
+    val borderColor by animateColorAsState(
         when {
             tile.isSelected -> MahjongPalette.SelectedGlow
             tile.isHinted -> MahjongPalette.FreeTileGlow
             else -> MahjongPalette.TileEdge
         },
         label = "tileBorder",
-    ).value
+    )
     val faceColor = if (tile.isFree) MahjongPalette.TileIvory else MahjongPalette.TileIvoryShadow
     val borderWidth = if (tile.isSelected || tile.isHinted) 2.5.dp else 1.dp
     val shape = RoundedCornerShape(6.dp)
