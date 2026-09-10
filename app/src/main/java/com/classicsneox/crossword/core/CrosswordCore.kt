@@ -1,7 +1,7 @@
 package com.classicsneox.crossword.core
 
 enum class Direction(val dr: Int, val dc: Int) {
-    ACROSS(0, 1), DOWN(1, 0),
+    ACROSS(0, 1), DOWN(1, 0);
     val perpendicular get() = if (this == ACROSS) DOWN else ACROSS
 }
 
