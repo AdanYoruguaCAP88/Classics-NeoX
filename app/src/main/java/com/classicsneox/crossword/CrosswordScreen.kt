@@ -3,6 +3,8 @@ package com.classicsneox.crossword
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -17,7 +19,12 @@ fun CrosswordScreen(onBack: () -> Unit) {
     DisposableEffect(Unit) { onDispose { controller.destroy() } }
 
     Surface(Modifier.fillMaxSize()) {
-        Column(Modifier.fillMaxSize().padding(12.dp)) {
+        Column(
+            Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .padding(12.dp)
+        ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 TextButton(onClick = onBack) { Text("‹ Volver") }
                 Text("Crucigrama", style = MaterialTheme.typography.titleLarge)
@@ -88,7 +95,7 @@ private fun Board(s: CrosswordUiState, c: CrosswordController) {
 private fun Clues(s: CrosswordUiState, c: CrosswordController) {
     Column(Modifier.fillMaxWidth()) {
         Text("Pistas", style = MaterialTheme.typography.titleMedium)
-        s.session.puzzle.words.take(12).forEach { w ->
+        s.session.puzzle.words.forEach { w ->
             Text(
                 "${s.session.puzzle.clueNumber(w)}. ${w.entry.clue}",
                 Modifier.fillMaxWidth().clickable { c.select(w.start) }.padding(3.dp)
