@@ -17,12 +17,11 @@ class GameEngine(private val deckGenerator: DeckGenerator = DeckGenerator()) {
         val deck = deckGenerator.createShuffled(seed).toMutableList()
         val columns = MutableList(7) { mutableListOf<Card>() }
 
-        // Deal Klondike's 28-card tableau. During the deal only the card
-        // in the last dealt column is exposed; the remaining tableau cards
-        // stay face-down until their covering cards are removed.
+        // Deal Klondike's 28-card tableau. The top card of every tableau
+        // column is face-up; all cards underneath remain face-down.
         for (column in 0 until 7) {
             repeat(column + 1) { index ->
-                columns[column].add(deck.removeAt(0).copy(faceUp = column == 6 && index == column))
+                columns[column].add(deck.removeAt(0).copy(faceUp = index == column))
             }
         }
 
