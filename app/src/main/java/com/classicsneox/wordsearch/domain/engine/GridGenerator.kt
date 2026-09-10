@@ -21,17 +21,19 @@ class GridGenerator(private val random: Random = Random.Default) {
             .forEach { wordText ->
                 if (wordText.length > size) return@forEach
 
+                // Enumerate every legal start/direction instead of sampling
+                // only 100 random candidates. This removes a probabilistic
+                // failure mode where a valid placement existed but was never
+                // tried, making generated puzzles much more reliable.
                 val candidates = buildList {
-                    repeat(100) {
-                        add(
-                            Triple(
-                                random.nextInt(size),
-                                random.nextInt(size),
-                                Direction.entries[random.nextInt(Direction.entries.size)]
-                            )
-                        )
+                    for (y in 0 until size) {
+                        for (x in 0 until size) {
+                            for (direction in Direction.entries) {
+                                add(Triple(x, y, direction))
+                            }
+                        }
                     }
-                }
+                }.shuffled(random)
 
                 val placement = candidates.firstOrNull { (x, y, direction) ->
                     canPlaceWord(grid, wordText, x, y, direction, size)
