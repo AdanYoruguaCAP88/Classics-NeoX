@@ -17,8 +17,8 @@ class GameEngine(private val deckGenerator: DeckGenerator = DeckGenerator()) {
         val deck = deckGenerator.createShuffled(seed).toMutableList()
         val columns = MutableList(7) { mutableListOf<Card>() }
 
-        // Deal Klondike's 28-card tableau. The top card of every tableau
-        // column is face-up; all cards underneath remain face-down.
+        // Deal Klondike's 28-card tableau. Every column's top card is face-up;
+        // cards underneath stay face-down.
         for (column in 0 until 7) {
             repeat(column + 1) { index ->
                 columns[column].add(deck.removeAt(0).copy(faceUp = index == column))
@@ -26,7 +26,7 @@ class GameEngine(private val deckGenerator: DeckGenerator = DeckGenerator()) {
         }
 
         history.clear()
-        return GameState(columns, List(4) { emptyList() }, deck, emptyList())
+        return GameState(columns.map { it.toList() }, List(4) { emptyList() }, deck.toList(), emptyList())
     }
 
     fun move(state: GameState, source: Source, destination: Destination): MoveResult {
