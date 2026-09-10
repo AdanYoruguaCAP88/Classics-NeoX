@@ -1,7 +1,6 @@
 package com.classicsneox.mahjong
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -57,7 +56,7 @@ class NeoXMahjongModule(
     fun Content(modifier: Modifier = Modifier, onExit: (() -> Unit)? = null) {
         val vm: MahjongViewModel = viewModel(factory = MahjongViewModel.Factory(repository, layout))
         viewModel = vm
-        val state by vm.uiState.collectAsStateWithLifecycle()
+        val state = vm.uiState.collectAsStateWithLifecycle().value
         MahjongScreen(
             state = state,
             onTileClick = vm::onTileClick,
