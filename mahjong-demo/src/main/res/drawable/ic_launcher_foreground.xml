@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Ficha de marfil, con el margen de seguridad del ícono adaptativo. -->
+    <path
+        android:fillColor="#F3ECDD"
+        android:pathData="M34,28 h40 a8,8 0 0 1 8,8 v36 a8,8 0 0 1 -8,8 h-40 a8,8 0 0 1 -8,-8 v-36 a8,8 0 0 1 8,-8 z" />
+    <path
+        android:strokeColor="#BFAF87"
+        android:strokeWidth="1.5"
+        android:pathData="M34,28 h40 a8,8 0 0 1 8,8 v36 a8,8 0 0 1 -8,8 h-40 a8,8 0 0 1 -8,-8 v-36 a8,8 0 0 1 8,-8 z" />
+    <!-- Glifo simplificado del dragón rojo (中), estilizado como trazos, no como tipografía. -->
+    <path
+        android:fillColor="#B1432F"
+        android:pathData="M52,40 h4 v28 h-4 z" />
+    <path
+        android:fillColor="#B1432F"
+        android:pathData="M40,46 h28 v4 h-28 z" />
+    <path
+        android:fillColor="#B1432F"
+        android:pathData="M44,58 h20 v4 h-20 z" />
+</vector>

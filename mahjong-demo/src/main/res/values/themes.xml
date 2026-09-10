@@ -1,0 +1,6 @@
+<resources>
+    <style name="Theme.NeoXMahjongDemo" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:statusBarColor">#122620</item>
+        <item name="android:windowBackground">#122620</item>
+    </style>
+</resources>

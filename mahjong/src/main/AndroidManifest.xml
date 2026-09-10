@@ -1,0 +1,8 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--
+        Módulo librería: no declara Activities ni permisos propios.
+        Todo lo que necesita CLASSICS NEOX de este módulo es el composable
+        NeoXMahjongGame (ver MahjongEntryPoint.kt) y, opcionalmente, la
+        clase NeoXMahjongModule para integración por contrato imperativo.
+    -->
+</manifest>
