@@ -16,9 +16,16 @@ class GameEngine(private val deckGenerator: DeckGenerator = DeckGenerator()) {
     fun newGame(seed: Long? = null): GameState {
         val deck = deckGenerator.createShuffled(seed).toMutableList()
         val columns = MutableList(7) { mutableListOf<Card>() }
+
+        // Deal Klondike's 28-card tableau. During the deal only the card
+        // in the last dealt column is exposed; the remaining tableau cards
+        // stay face-down until their covering cards are removed.
         for (column in 0 until 7) {
-            repeat(column + 1) { index -> columns[column].add(deck.removeAt(0).copy(faceUp = index == column)) }
+            repeat(column + 1) { index ->
+                columns[column].add(deck.removeAt(0).copy(faceUp = column == 6 && index == column))
+            }
         }
+
         history.clear()
         return GameState(columns, List(4) { emptyList() }, deck, emptyList())
     }
